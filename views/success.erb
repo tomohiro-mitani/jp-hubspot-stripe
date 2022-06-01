@@ -1,0 +1,30 @@
+<div class="relative">
+  <div class="mx-auto">
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img class="w-full invisible lg:visible" src="https://images.unsplash.com/photo-1443996104801-80c82e789b18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3153&q=80">
+        <div class="absolute inset-0 lg:bg-gray-300 bg-gray-300" style="mix-blend-mode: multiply;"></div>
+      </div>
+      <div class="relative px-4 py-16 xl:py-72">
+        <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <span class="block text-black lg:text-white">サブスクの開始登録が完了しました❕</span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-center text-xl text-gray-500 lg:text-white sm:max-w-3xl">
+          ダッシュボードにて契約管理を行うことができます。
+        </p>
+        <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+          <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+            <a href="/" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm bg-white hover:bg-indigo-50 sm:px-8">
+              デモをやり直す
+            </a>
+            <form method="POST" action="/create-customer-portal-session">
+              <input type="hidden" name="customer" value=<%= @subscription.customer.id %>>
+                            <input type="hidden" name="subscription" value=<%= @subscription.id %>>
+              <button type="submit" class="brand-secondary-color flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-opacity-60 hover:bg-opacity-70 sm:px-8">ダッシュボード</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

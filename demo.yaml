@@ -1,0 +1,34 @@
+ # min 5 chars
+name: "Simple Monthly Billing"
+
+# acct_xxxx
+acct_id: "acct_1JFNRhFQBiGCpWsC"
+
+# https://<subdomain>.stripedemos.com
+# recommendation: obfuscate the URL a bit by adding a random string
+subdomain: "simple-monthly-billing"
+
+# Billing, Connect, Issuing, Payments, Radar, Other
+category: "Billing"
+
+# comma separated keywords
+tags: "ruby, billing, elements"
+
+# min 5 chars
+description: "Buying a monthly subscription to a photo service"
+
+# Slack username
+creator: davidsantoso
+
+# port
+port: 4567
+
+# private
+private: false
+
+# the slack channel of your team (ex: #solutions)
+team: "#solutions"
+
+# enter a simple password here you can provide to your customer
+# leave blank for no password
+password: 

@@ -1,0 +1,41 @@
+<div class="brand-primary-color relative p-2">
+  <div class="relative z-20">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10">
+      <a href="/" class="flex">
+        <div>
+          <a href="/" class="flex">
+          <img class="head" src="https://scontent-nrt1-1.xx.fbcdn.net/v/t1.6435-1/92299291_102750974741201_4559640459432951808_n.png?stp=dst-png_p120x120&_nc_cat=110&ccb=1-7&_nc_sid=1eb0c7&_nc_ohc=IRJ8uPgjgVQAX8rlIYb&_nc_ht=scontent-nrt1-1.xx&oh=00_AT8uguzfRADst4_DyGdUtzrZ_nIpYbq2OB9sWR3ST1JsNA&oe=62BC47F0" alt="W3C">
+          </a>
+        </div>
+      </a>
+      <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+        <nav class="flex space-x-10">
+          <a href="#" class="text-base font-medium text-white">
+            Product
+          </a>
+          <a href="#" class="text-base font-medium text-white">
+            Pricing
+          </a>
+          <a href="#" class="text-base font-medium text-white">
+            Company
+          </a>
+          </div>
+        </nav>
+        <div class="flex items-center md:ml-12">
+        <% if @subscription && @subscription.customer %>
+          <div class="text-black text-base font-medium">
+            ようこそ、<%= @subscription.customer.name %>さん👋
+          </div>
+        <% else %>
+          <a href="#" class="inline-flex space-x-2 text-base font-medium text-white uppercase">
+            <svg class="mr-2 flex-shrink-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Sign In
+          </a>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+
+  <body class="brand-font">
+
+    <!-- HEADER -->
+
+    <!-- END HEADER -->
+
+    <!-- MAIN -->
+    <div class="brand-primary-color h-auto">
+      <div class="pt-12 sm:pt-16 lg:pt-24">
+        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto space-y-2 lg:max-w-none">
+            <h2 class="text-lg leading-6 font-semibold text-black uppercase tracking-wider">
+              契約者登録ページ
+            </h2>
+            <p class="text-3xl font-bold text-black sm:text-4xl lg:text-5xl">
+              ようこそ Sharefesta へ
+            </p>
+            <p class="text-xl text-blac">
+              下記のご契約予定のプランをご確認いただき、ご契約フォームへお進みください。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 sm:mt-12 lg:mt-16 pb-56 bg-gray-200">
+        <div class="relative">
+          <div class="brand-primary-color absolute inset-0 h-3/4"></div>
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-md mx-auto space-y-4 lg:max-w-5xl lg:grid lg:grid-cols-2 lg:gap-5 lg:space-y-0">
+              <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+                <div class="px-6 py-8 bg-white sm:p-10 sm:pb-6">
+                  <div>
+                    <h3 class="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-gray-100 text-gray-600" id="tier-standard">
+                      今回ご契約
+                    </h3>
+                  </div>
+                  <div class="mt-4 flex items-baseline text-6xl font-bold">
+                  <%unless @total_amount == 0%>
+                    ¥
+                    <%= @total_amount %>
+                    <span class="ml-1 text-2xl font-medium text-gray-500">
+                      /月
+                    </span>
+                    <%end%>
+                  </div>
+                  <p class="mt-5 text-lg text-gray-500">
+                    ご契約に含まれるプラン
+                  </p>
+                </div>
+                <div class="flex-1 flex flex-col justify-between px-6 pt-6 pb-8 bg-gray-50 space-y-6 sm:p-10 sm:pt-6">
+                  <ul class="space-y-4">
+                    <%   @products_amount_array.each do |product_amount| %>
+
+                      <li class="flex items-start">
+                        <div class="flex-shrink-0">
+                          <!-- Heroicon name: outline/check -->
+                          <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <p class="ml-3 text-base text-gray-700">
+                           <%= product_amount[0] %><% unless product_amount[1].nil? || product_amount[1] == 0 %>, ¥ <%= product_amount[1] %> <%end%>
+                        </p>
+                      </li>
+
+                    <% end %>
+                  </ul>
+                  <div class="rounded-md shadow">
+                    <a href="/checkout?deal=<%=@deal%>" class="brand-secondary-color flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium text-white rounded-md" aria-describedby="tier-standard">
+                      契約登録開始
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MAIN -->
+  </body>
+</html>
+

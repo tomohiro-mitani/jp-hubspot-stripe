@@ -1,0 +1,59 @@
+<!doctype htmVGl>
+<html>
+  <head>
+    <title>[デモ] アクティベーション</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="icon" href="https://scontent-nrt1-1.xx.fbcdn.net/v/t1.6435-1/92299291_102750974741201_4559640459432951808_n.png?stp=dst-png_p120x120&_nc_cat=110&ccb=1-7&_nc_sid=1eb0c7&_nc_ohc=IRJ8uPgjgVQAX8rlIYb&_nc_ht=scontent-nrt1-1.xx&oh=00_AT8uguzfRADst4_DyGdUtzrZ_nIpYbq2OB9sWR3ST1JsNA&oe=62BC47F0" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      (function(){
+        window.mystripe = Stripe("<%= ENV['PK_KEY'] %>");
+      })();
+    </script>
+
+    <style>
+      /* Change the color of larger foundational elements like background */
+      .brand-primary-color {
+        background-color: #FFFFFF !important;
+      }
+
+      /* Change the color of secondary elements like buttons */
+      .brand-secondary-color {
+        background-color: #E94A5E !important;
+      }
+      .brand-secondary-color:hover {
+        background-color: #e55767  !important;
+      }
+
+      /* Update the URL to one that points at the company logo */
+      /* If needed, also adjust the height to resize the logo */
+      .brand-logo {
+        content: url("https://tailwindui.com/img/logos/workflow-mark.svg?color=white");
+        height: 2.5rem;
+      }
+
+      /* Change the font to the brand's font or a very similar font */
+      /* Be sure to also include the <link> to where it's hosted above */
+      .brand-font {
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .head {
+        border-radius: 50%;
+        width: 50; 
+        height: 50;
+      }
+
+    </style>
+  </head>
+  <body style='font-family: "Open Sans", sans-serif;'>
+    <%= erb :_header %>
+    <%= yield %>
+    <%= erb :_footer %>
+  </body>
+</html>

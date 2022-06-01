@@ -1,0 +1,136 @@
+<div class="relative bg-gray-100 p-20">
+  <div class="lg:absolute lg:inset-0">
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="w-full object-cover object-right lg:absolute lg:h-full" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4878&q=80" alt="">
+    </div>
+  </div>
+  <div class="relative pt-12 pb-16 px-4 sm:pt-16 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto lg:grid lg:grid-cols-2">
+    <div class="lg:pr-8">
+      <div class="max-w-md mx-auto sm:max-w-lg lg:mx-0">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          契約登録フォーム
+        </h2>
+        <br/>
+        <p class="mt-4 text-lg text-gray-500 sm:mt-3">
+          下記より必要事項をご確認およびパスワードを設定後、サインアップをお願いします。
+        </p>
+
+        <form id="payment-form" action="/subscribe" method="POST" class="mt-9 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+          <input type="hidden" name="type" value="<%= locals[:type] %>" />
+          <input type="hidden" name="deal" value="<%= @deal %>" />
+          <div class="sm:col-span-2">
+            <label for="company_name" class="block text-sm font-medium text-gray-700">会社名</label>
+            <div class="mt-1">
+              <input id="company_name" name="company_name" autocomplete="company_name" value=<%=@company_name%> class="block w-full p-2 shadow-sm sm:text-sm border-gray-300 rounded-md">
+            </div>
+          </div>
+          <div>
+            <label for="last_name" class="block text-sm font-medium text-gray-700">苗字</label>
+            <div class="mt-1">
+              <input type="text" name="last_name" id="last_name" autocomplete="family-name" value=<%=@last_name%> class="block w-full p-2 shadow-sm sm:text-sm border-gray-300 rounded-md">
+            </div>
+          </div>
+          <div>
+            <label for="first_name" class="block text-sm font-medium text-gray-700">名前</label>
+            <div class="mt-1">
+              <input type="text" name="first_name" id="first_name" autocomplete="given-name" value=<%=@first_name%> class="block w-full p-2 shadow-sm sm:text-sm border-gray-300 rounded-md">
+            </div>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="email" class="block text-sm font-medium text-gray-700">Eメール</label>
+            <div class="mt-1">
+              <input id="email" name="email" type="email" autocomplete="email" value=<%=@email%> class="block w-full p-2 shadow-sm sm:text-sm border-gray-300 rounded-md">
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="misl" class="block text-sm font-medium text-gray-700">パスワード</label>
+            <div class="mt-1">
+              <input id="misl" name="misl" type="misl" autocomplete="misl"  class="block w-full p-2 shadow-sm sm:text-sm border-gray-300 rounded-md">
+            </div>
+          </div>
+          <%# <div class="sm:col-span-2">
+            <label for="email" class="block text-sm font-medium text-gray-700">Credit Card</label>
+            <div id="element-container" class="mt-1 p-3 bg-white rounded-md shadow-sm">
+              <div id="element" name="email" type="email" autocomplete="email"></div>
+              <input type="hidden" name="payment_method_id" id="payment_method_id" />
+            </div>
+          </div> %>
+
+          <div class="text-right sm:col-span-2 mt-2">
+            <button id="pay-btn" type="submit" class="brand-secondary-color inline-flex justify-center py-2 px-8 border border-transparent shadow-sm text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <div id="loading-container" hidden>
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+                 <% unless @total_amount.nil? || @total_amount == 0 %>
+                ¥<%= @total_amount %>/月
+                <%else%>
+                サインアップ
+                <%end%>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // mount elements
+  // var elements = mystripe.elements(),
+  //     cardElement = elements.create("card", {
+  //       style: {
+  //           base: {
+  //               backgroundColor: '#A5A49C',
+  //               padding: 8,
+  //             }
+  //         }
+  //     }),
+  //   validForm = false;
+
+  //   cardElement.mount("#element");
+
+  //   cardElement.on('change', function(event) {
+  //     if (event.complete) {
+  //       // enable payment button
+  //       validForm = true;
+  //       console.log("Good to go.");
+  //     } else if (event.error) {
+  //       // show validation to customer
+  //       validForm = false;
+  //       alert(event.eror.message);
+  //       console.error(event.error.message);
+  //     }
+  //   });
+
+    // listen for submission
+    // var form = document.getElementById("payment-form");
+    // form.addEventListener("submit", function(e) {
+    //   e.preventDefault();
+    //   if (!validForm) { return false; }
+
+    //   var loading = document.getElementById("loading-container");
+    //   var payButton = document.getElementById("pay-btn");
+
+    //   loading.removeAttribute("hidden");
+
+    //   mystripe.createPaymentMethod({
+    //     type: 'card',
+    //     card: cardElement
+    //   })
+    //   .then(function(result) {
+    //     if (result.error) {
+    //         alert(result.error);
+    //       } else {
+    //           document.getElementById('payment_method_id').value = result.paymentMethod.id;
+    //           form.submit();
+    //         }
+    //     });
+
+    //   return false;
+
+    // });
+</script>
