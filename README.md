@@ -1,4 +1,4 @@
-# Simple Monthly Billing
+# Stripe Billing with Hubspot Integration
 
 This simple monthly billing demo was originally built for the Gogo Inflight Wifi EBC presentation, but we've since repurposed it to just be a more generic billing demo to show creating a monthly, fixed priced subscription with Stripe. It follows relatively closely the ["Simple monthly billing" example in our docs](https://stripe.com/docs/billing/subscriptions/examples#simple-monthly-billing).
 
@@ -51,7 +51,3 @@ Go to [http://localhost:4567](http://localhost:4567) in your browser to start us
 ## Resetting Data
 If you'd like to wipe the slate clean and start with a fresh environment, you can [wipe all test data](https://dashboard.stripe.com/account/data) from your Stripe account. This demo runs purely on top of the Stripe API with no local database so wiping the Stripe account resets the entire application.
 
-
-## Credits
-* Code: [David Santoso](https://home.corp.stripe.com/people/davidsantoso)
-* Stock photos provided by [Unsplash](https://unsplash.com/)
