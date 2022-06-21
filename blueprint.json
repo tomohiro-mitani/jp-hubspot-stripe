@@ -1,0 +1,401 @@
+{
+    "name": "Products Integration between Stripe and HubSpot",
+    "flow": [
+        {
+            "id": 5,
+            "module": "stripe:watchEvents",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 100366
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -160,
+                    "y": -8
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "My Watch Events webhook"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:stripe2",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "created",
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "event_type",
+                        "type": "text",
+                        "label": "Event Type"
+                    },
+                    {
+                        "name": "event_id",
+                        "type": "text",
+                        "label": "Event ID"
+                    },
+                    {
+                        "name": "object",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "Id"
+                            },
+                            {
+                                "name": "object",
+                                "type": "text",
+                                "label": "Object"
+                            },
+                            {
+                                "name": "amount",
+                                "type": "number",
+                                "label": "Amount"
+                            },
+                            {
+                                "name": "created",
+                                "type": "number",
+                                "label": "Created"
+                            },
+                            {
+                                "name": "currency",
+                                "type": "text",
+                                "label": "Currency"
+                            },
+                            {
+                                "name": "interval",
+                                "type": "text",
+                                "label": "Interval"
+                            },
+                            {
+                                "name": "interval_count",
+                                "type": "number",
+                                "label": "Interval count"
+                            },
+                            {
+                                "name": "livemode",
+                                "type": "boolean",
+                                "label": "Livemode"
+                            },
+                            {
+                                "name": "metadata",
+                                "spec": [],
+                                "type": "collection",
+                                "label": "Metadata"
+                            },
+                            {
+                                "name": "nickname",
+                                "type": "text",
+                                "label": "Nickname"
+                            },
+                            {
+                                "name": "product",
+                                "type": "text",
+                                "label": "Product"
+                            },
+                            {
+                                "name": "trial_period_days",
+                                "type": "text",
+                                "label": "Trial period days"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Object"
+                    },
+                    {
+                        "name": "raw",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Raw Webhook Data"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "stripe:makeAnApiCall",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 164538
+            },
+            "mapper": {
+                "qs": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "url": "/v1/products/{{5.object.product}}",
+                "body": "",
+                "method": "GET",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 136,
+                    "y": -6
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "items": [
+                                null
+                            ]
+                        },
+                        "method": {
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "items": [
+                                null
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "stripe"
+                            },
+                            "label": "My Stripe connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:stripe",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "PATCH",
+                                "DELETE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "hubspotcrm:MakeAPICall",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 164532
+            },
+            "mapper": {
+                "url": "/crm-objects/v1/objects/products",
+                "method": "POST",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "qs": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "body": "[\n  {\n    \"name\": \"name\",\n    \"value\": \"{{6.body.name}}\"\n  },\n  {\n    \"name\": \"description\",\n    \"value\": \"A description of this product.\"\n  },\n  {\n    \"name\": \"price\",\n    \"value\": \"{{5.object.amount}}\"\n  },\n  {\n    \"name\": \"stripe_product_id\",\n    \"value\": \"{{6.body.id}}\"\n  },\n  {\n    \"name\": \"stripe_price_id\",\n    \"value\": \"{{6.body.price}}\"\n  }\n]"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 479,
+                    "y": -8
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My HubSpot CRM connection (tomohiromitani@hotmail.com)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "hubspotcrm"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "method": {
+                            "label": "POST"
+                        },
+                        "headers": {
+                            "items": [
+                                null
+                            ]
+                        },
+                        "qs": {
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:hubspotcrm",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "PATCH",
+                                "DELETE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "type": "array",
+                        "label": "Headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "qs",
+                        "type": "array",
+                        "label": "Query String",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us1.make.com"
+    }
+}

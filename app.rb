@@ -67,11 +67,15 @@ def get_stripe_price_id_array(line_items_array)
       puts error_message
     end
     begin
-      api_response = Hubspot::Crm::Products::BasicApi.new.get_by_id(product_id, archived: false, auth_names: "hapikey")
-      stripe_price_id = api_response.properties["description"]
-      puts "====="
-      puts stripe_price_id
-      puts "====="
+      hapi_api_key = ENV["HS_KEY"]
+      url = URI("https://api.hubapi.com/crm-objects/v1/objects/products/" + product_id + "?hapikey=" + hapi_api_key + "&properties=stripe_price_id")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Get.new(url)
+      request["accept"] = 'application/json'
+      response = http.request(request)
+      stripe_price_id =  JSON.parse(response.read_body)["properties"]["stripe_price_id"]["versions"][0]["value"]
       stripe_price_id_array << stripe_price_id
     rescue Hubspot::Crm::Products::ApiError => e
       error_message = JSON.parse(e.response_body)['message']
@@ -208,8 +212,8 @@ post '/subscribe' do
 
   begin
     test_clock = Stripe::TestHelpers::TestClock.create(
-      frozen_time: 1653465600,
-      name: 'test clock 1',
+      frozen_time: 1656637200,
+      name: 'new test clock for QTC',
     )
 
     # create customer for email with params[:pm_id]

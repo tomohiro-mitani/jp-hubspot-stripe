@@ -1,33 +1,21 @@
-# Stripe Billing with Hubspot Integration
+# Stripe and Hubspot Integration
 
-This simple monthly billing demo was originally built for the Gogo Inflight Wifi EBC presentation, but we've since repurposed it to just be a more generic billing demo to show creating a monthly, fixed priced subscription with Stripe. It follows relatively closely the ["Simple monthly billing" example in our docs](https://stripe.com/docs/billing/subscriptions/examples#simple-monthly-billing).
+This simple demo was  built to show quote to cash automation by using Stripe and Hubspot. Products in Stripe are integrated with that of Hubspot by using Integorate. A scenario in Integorate listens to the Stripe events. Whenever a product is created in Stripe, Integorate will create the equivalent product in Hubspot.
 
-**You can try the app live at [https://simple-monthly-billing.stripedemos.com/](https://simple-monthly-billing.stripedemos.com/).**
-
-<img width="2069" alt="Screen Shot 2021-10-21 at 10 59 53 AM" src="https://git.corp.stripe.com/storage/user/4247/files/0d1d9580-325e-11ec-80bb-38f3c8e10ff3">
+This article is published on [Medium](https://medium.com/@tomozilla/automating-qtc-with-stripe-billing-and-hubspot-7f37edd37f5a).
 
 ## Overview
 
-This demo has the following features, Stripe products, and Stripe integrations:
-<!-- prettier-ignore -->
-|     |Features
-:---: | :---
-📦|**Products and Prices.** Furni uses the Stripe [Products and Prices](https://stripe.com/docs/billing/prices-guide) APIs.
-⚡️|**Customers.** Furni allows customers to create accounts which creates new [Customers](https://stripe.com/docs/billing/customer) in Stripe to save purchase history.
-💳|**Elements** This demo uses pre-built Stripe components customized to fit the app design, including the [Stripe Elements](https://stripe.com/docs/elements) which provides real-time validation, formatting, and localization.
-
-## Running locally
-
-If you want to run this demo locally against a different Stripe account, follow the instructions below:
+This demo has the following features, Stripe products, and Hubspot integrations:
 
 ### Requirements
 
 * You'll need a Stripe account. [Sign up for free](https://dashboard.stripe.com/register) before running the application.
 * Ruby 2.6.3
+* HubSpot Account for your Sales Hub
+* Sign up [Make](https://www.make.com/en?_ga=2.77219927.334397487.1655780516-208306684.1655780516) and crate a scenario (You can use blueprint.json if you want.)
 
-### Getting Started
-
-Clone the repo and install dependencies:
+### Setup
 
 ```
 $ git clone https://git.corp.stripe.com/stripe-internal/solutions-demos
@@ -41,13 +29,23 @@ Copy the .env.template file. You'll need to fill out the Publishable and Secret 
 $ cp .env.template .env
 ```
 
+Set up secret key for HubSpot and Stripe in env file
+
 Run the app!
 ```
 $ bundle exec ruby app.rb
 ```
 
-Go to [http://localhost:4567](http://localhost:4567) in your browser to start using the demo.
+### Getting Started
 
-## Resetting Data
-If you'd like to wipe the slate clean and start with a fresh environment, you can [wipe all test data](https://dashboard.stripe.com/account/data) from your Stripe account. This demo runs purely on top of the Stripe API with no local database so wiping the Stripe account resets the entire application.
+1. Sync products between Stripe and HubSpot through using Integromat. You can import blueprint.json in Make for your template.
+
+2. Create a subscription product in Stripe and let Integromat sync the product in HubSpot.
+
+3. Create a HubSpot deal with products as line items.
+
+4. Clone the repo and install dependencies:
+
+5. Go to [http://localhost:4567/?deal=DEAL_ID](http://localhost:4567/?deal=DEAL_ID) in your browser to start using the demo.
+
 
