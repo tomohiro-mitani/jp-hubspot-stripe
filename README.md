@@ -2,7 +2,7 @@
 
 This simple demo was  built to show quote to cash automation by using Stripe and Hubspot. Products in Stripe are integrated with that of Hubspot by using Integorate. A scenario in Integorate listens to the Stripe events. Whenever a product is created in Stripe, Integorate will create the equivalent product in Hubspot.
 
-This article is published on [Medium](https://medium.com/@tomozilla/automating-qtc-with-stripe-billing-and-hubspot-7f37edd37f5a).
+This article is published on [note](https://note.com/domo79/n/ne7d8aff1c479).
 
 ## Overview
 
